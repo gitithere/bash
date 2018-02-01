@@ -1,0 +1,21 @@
+#! /bin/bash
+###GET LATEST DATE
+#now="$(date +'%m-%d-%y')"
+now="$(date +'%y-%m-%d')"
+
+###CREATE LOG FILE
+touch /root/deletefiles-$now.log
+chmod 644 /root/deletefiles-$now.log
+
+###LOG AND DELETE TRAC BACKUP TAR.GZ FILES GREATER THAN +243 DAYS OLD
+find /root/backup/trac -maxdepth 1 -mtime +243 -type f -name "TRAC_*" -print | sort > /root/deletefiles-$now.log
+find /root/backup/trac -maxdepth 1 -mtime +243 -type f -name "TRAC_*" -delete
+
+###CLEANUP FIND AND DELETE deletefiles.logs GREATER THAN 30 DAYS OLD
+find /root -maxdepth 1 -mtime +32 -type f -name "deletefiles-*" -print | sort >> /root/deletefiles-$now.log
+find /root -maxdepth 1 -mtime +32 -type f -name "deletefiles-*" -delete
+
+exit
+
+crontab -e
+30 5 * * * /root/DeleteTracArchiveFiles.sh
