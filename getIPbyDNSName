@@ -1,0 +1,22 @@
+!/bin/bash
+infile="/home/a_troy_takaki/Documents/kiosk.txt"
+outfile="/home/a_troy_takaki/Documents/kiosk_ip.txt"
+
+###CREATE $outfile
+rm -f $outfile
+touch $outfile
+
+READ_FILE () {
+while IFS= read line
+do
+        # display $Line or do something with $line
+        echo "$line"
+        echo "-ORIGINAL-$line" >> $outfile
+        dig +short "$line" >> $outfile
+done <"$infile"
+}
+
+###MAIN
+READ_FILE
+
+exit
