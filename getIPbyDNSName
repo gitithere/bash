@@ -1,6 +1,6 @@
 !/bin/bash
-infile="/home/a_troy_takaki/Documents/kiosk.txt"
-outfile="/home/a_troy_takaki/Documents/kiosk_ip.txt"
+infile="/home/xxx/Documents/kiosk.txt"
+outfile="/home/xxx/Documents/kiosk_ip.txt"
 
 ###CREATE $outfile
 rm -f $outfile
